@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catsmoke HQ</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0a0a0a;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .room-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: url('A_2D_digital_illustration_depicts_a_dimly_lit_bedr.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    /* Music Widget Positioning */
+    .music { top: 2%; left: 8%; width: 10%; height: 60%; }
+
+    /* TV Widget Positioning */
+    .tv { top: 35%; left: 50%; width: 18%; height: 20%; }
+
+    /* Closet Widget Positioning */
+    .closet { top: 30%; left: 80%; width: 12%; height: 35%; }
+
+    /* Desk Widget Positioning */
+    .desk { top: 70%; left: 60%; width: 20%; height: 20%; }
+
+    .music-widget {
+      position: absolute;
+      top: 10%;  /* Adjust this according to where the music widget should appear */
+      left: 8%;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+      z-index: 10;
+      font-size: 14px;
+    }
+
+    .music-widget .song {
+      color: grey;
+      cursor: pointer;
+      margin: 6px 0;
+    }
+    .music-widget .song:hover {
+      color: white;
+    }
+
+    .music:hover ~ .music-widget,
+    .music-widget:hover {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* TV Widget Styling */
+    .tv-widget {
+      position: absolute;
+      top: 50%;  /* Adjust this position according to the TV location */
+      left: 50%;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+      z-index: 10;
+      font-size: 14px;
+    }
+
+    .tv-widget .video {
+      color: grey;
+      cursor: pointer;
+      margin: 6px 0;
+    }
+    .tv-widget .video:hover {
+      color: white;
+    }
+
+    .tv:hover ~ .tv-widget,
+    .tv-widget:hover {
+      display: block;
+    }
+
+    /* Closet Widget Styling */
+    .closet-widget {
+      position: absolute;
+      top: 40%;  /* Adjust this position according to the closet location */
+      left: 80%;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+      z-index: 10;
+      font-size: 14px;
+    }
+
+    .closet-widget .item {
+      color: grey;
+      cursor: pointer;
+      margin: 6px 0;
+    }
+    .closet-widget .item:hover {
+      color: white;
+    }
+
+    .closet:hover ~ .closet-widget,
+    .closet-widget:hover {
+      display: block;
+    }
+
+    /* Desk Widget Styling */
+    .desk-widget {
+      position: absolute;
+      top: 75%;  /* Adjust this position according to the desk location */
+      left: 62%;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+      z-index: 10;
+      font-size: 14px;
+    }
+
+    .desk-widget .option {
+      color: grey;
+      cursor: pointer;
+      margin: 6px 0;
+    }
+    .desk-widget .option:hover {
+      color: white;
+    }
+
+    .desk:hover ~ .desk-widget,
+    .desk-widget:hover {
+      display: block;
+    }
+
+    /* Music Player Styling */
+    .music-player {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.0);
+      padding: 10px 15px;
+      border-radius: 8px;
+      z-index: 9999; /* Ensures it's above all other elements */
+    }
+
+    .music-player button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .music-player input[type="range"] {
+      width: 100px;
+      -webkit-appearance: none;
+      height: 6px;
+      background: linear-gradient(90deg, #ffaa33, #ffffff);
+      border-radius: 4px;
+      outline: none;
+      transition: background 0.3s ease;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="room-container">
+        <div class="hotspot music" onclick="openMusicWidget()"></div>
+        <div class="hotspot tv" onclick="openPopup('video')"></div>
+        <div class="hotspot closet" onclick="openPopup('merch')"></div>
+        <div class="hotspot desk" onclick="openPopup('lyrics')"></div>
+
+        <div class="music-widget" id="musicWidget">
+            <div class="song" onclick="playTrack('audio/fts.wav')">▶ FTS</div>
+            <div class="song" onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
+            <div class="song" onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
+        </div>
+
+        <div class="tv-widget" id="tvWidget">
+            <div class="video">📺 Retrospect (Visualizer)</div>
+            <div class="video">⌛ 360 Degrees ft Haz</div>
+            <div class="video">⌛ Out The Blue ft Haz</div>
+        </div>
+
+        <div class="closet-widget" id="closetWidget">
+            <div class="item">• Tees</div>
+            <div class="item">• Outerwear</div>
+            <div class="item">• Headwear</div>
+        </div>
+
+        <div class="desk-widget" id="deskWidget">
+            <div class="option" onclick="window.open('https://instagram.com/activecatsmoke', '_blank')">📷 Follow</div>
+            <div class="option" id="contactBtn" onclick="openPopupForm('contact')" disabled>❌ Contact</div>
+            <div class="option" id="submissionBtn" onclick="openPopupForm('submission')" disabled>❌ Submissions</div>
+        </div>
+
+        <div class="music-player">
+            <div id="trackTitle" style="color: white; font-size: 14px; margin-right: 10px;">Now Playing:</div>
+            <button id="playPauseBtn">PLAY</button>
+            <input type="range" id="seekBar" value="0" min="0" max="100">
+        </div>
+
+        <audio id="audio" src="audio/fts.wav"></audio>
+    </div>
+
+<script>
+  const audio = document.getElementById('audio');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const seekBar = document.getElementById('seekBar');
+  const trackTitle = document.getElementById('trackTitle');
+
+  // Play/Pause Button Logic
+  playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playPauseBtn.textContent = 'PAUSE';
+    } else {
+      audio.pause();
+      playPauseBtn.textContent = 'PLAY';
+    }
+  });
+
+  // Update Seek Bar Based on Current Time
+  audio.addEventListener('timeupdate', () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    seekBar.value = progress;
+  });
+
+  // Allow Seek Bar Input to Change Audio Time
+  seekBar.addEventListener('input', () => {
+    const time = (seekBar.value / 100) * audio.duration;
+    audio.currentTime = time;
+  });
+
+  // Play Track on Click
+  function playTrack(src) {
+    const filename = src.split('/').pop();
+    const titleMap = {
+      'fts.wav': 'FTS',
+      'triple_smoke.wav': 'Triple Smoke',
+      'cannon.wav': 'Cannon'
+    };
+
+    trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
+    audio.src = src;
+    audio.currentTime = 0;
+    seekBar.value = 0;
+    audio.play();
+    playPauseBtn.textContent = 'PAUSE';
+  }
+
+  // Open the music widget on hover
+  function openMusicWidget() {
+    const widget = document.getElementById('musicWidget');
+    widget.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
