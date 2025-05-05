@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catsmoke HQ – Mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catsmoke HQ</title>
   <style>
     body {
       margin: 0;
@@ -13,22 +13,234 @@
       cursor: default;
     }
 
-    .room-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background: url('catsmokephone.png') no-repeat center center;
-      background-size: cover;
+.room-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url('art/catsmokephone.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+    .top-navbar {
       display: flex;
-      flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.85);
+      position: absolute;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-navbar div {
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.85);
+      min-width: 160px;
+      z-index: 10;
+      padding: 10px;
+      border-radius: 6px;
+      top: 25px;
+    }
+
+    .top-navbar div:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content div {
+      color: white;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+
+    .music-player {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
       align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.0);
+      padding: 10px 15px;
+      border-radius: 8px;
+      z-index: 9999;
+    }
+
+    .music-player button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .music-player input[type="range"] {
+      width: 100px;
+      -webkit-appearance: none;
+      height: 6px;
+      background: linear-gradient(90deg, #ffaa33, #ffffff);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .widget {
+      display: none;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      position: absolute;
+      z-index: 20;
+    }
+
+    #tvWidget { top: 50%; left: 10%; }
+    #closetWidget { top: 30%; left: 10%; }
+    #deskWidget { top: 70%; left: 10%; }
+
+    .widget div {
+      margin: 5px 0;
+      cursor: pointer;
+      color: grey;
+    }
+
+    .widget div:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .music-player { width: 90%; bottom: 10px; }
+      .music-player button { font-size: 18px; }
+      .widget { width: 80%; font-size: 12px; left: 10%; }
+    }
+
+    @media (max-width: 480px) {
+      .music-player { width: 100%; bottom: 5px; padding: 8px; }
+      .music-player button { font-size: 16px; }
+      .widget { width: 90%; left: 5%; font-size: 10px; }
     }
   </style>
 </head>
 <body>
   <div class="room-container">
-    <p>Mobile version content</p>
-    <!-- Add your music player, icons, widgets, etc. here -->
+
+    <!-- Navbar -->
+    <div class="top-navbar">
+      <div>
+        Music
+        <div class="dropdown-content">
+          <div onclick="playTrack('audio/fts.wav')">▶ FTS</div>
+          <div onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
+          <div onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
+        </div>
+      </div>
+      <div>
+        Videos
+        <div class="dropdown-content">
+          <div onclick="toggleWidget('tvWidget')">📺 Retrospect (Visualizer)</div>
+          <div onclick="toggleWidget('tvWidget')">⌛ 360 Degrees ft Haz</div>
+          <div onclick="toggleWidget('tvWidget')">⌛ Out The Blue ft Haz</div>
+        </div>
+      </div>
+      <div>
+        Merch
+        <div class="dropdown-content">
+          <div onclick="toggleWidget('closetWidget')">• Tees</div>
+          <div onclick="toggleWidget('closetWidget')">• Outerwear</div>
+          <div onclick="toggleWidget('closetWidget')">• Headwear</div>
+        </div>
+      </div>
+      <div>
+        Contact
+        <div class="dropdown-content">
+          <div onclick="toggleWidget('deskWidget')">📷 Follow</div>
+          <div>❌ Contact</div>
+          <div>❌ Submissions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+      <div id="trackTitle" style="color: white; font-size: 14px;">Now Playing:</div>
+      <button id="playPauseBtn">PLAY</button>
+      <input type="range" id="seekBar" value="0" min="0" max="100">
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audio" src="audio/fts.wav"></audio>
+
+    <!-- Widgets -->
+    <div id="tvWidget" class="widget">
+      <div>Coming Soon: Retrospect</div>
+    </div>
+
+    <div id="closetWidget" class="widget">
+      <div>Tees - Coming Soon</div>
+    </div>
+
+    <div id="deskWidget" class="widget">
+      <div>Follow @activecatsmoke</div>
+    </div>
+
   </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const seekBar = document.getElementById('seekBar');
+    const trackTitle = document.getElementById('trackTitle');
+
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = 'PAUSE';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = 'PLAY';
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      seekBar.value = progress;
+    });
+
+    seekBar.addEventListener('input', () => {
+      const time = (seekBar.value / 100) * audio.duration;
+      audio.currentTime = time;
+    });
+
+    function playTrack(src) {
+      const filename = src.split('/').pop();
+      const titleMap = {
+        'fts.wav': 'FTS',
+        'triple_smoke.wav': 'Triple Smoke',
+        'cannon.wav': 'Cannon'
+      };
+      trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
+      audio.src = src;
+      audio.currentTime = 0;
+      seekBar.value = 0;
+      audio.play();
+      playPauseBtn.textContent = 'PAUSE';
+    }
+
+    function toggleWidget(widgetId) {
+      const widget = document.getElementById(widgetId);
+      widget.style.display = widget.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
