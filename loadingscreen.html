@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catsmoke HQ - Loading</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0a0a0a;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .loading-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('art/loadbg.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .loading-bar-container {
+      width: 80%;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loading-bar {
+      width: 0;
+      height: 100%;
+      background-color: #ffaa33;
+      border-radius: 10px;
+      animation: loadingAnimation 5s linear infinite;
+    }
+
+    @keyframes loadingAnimation {
+      0% { width: 0%; }
+      50% { width: 50%; }
+      100% { width: 100%; }
+    }
+
+    .loading-text {
+      color: white;
+      font-size: 24px;
+      margin-top: 20px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* For smaller devices (phones) */
+    @media (max-width: 768px) {
+      .loading-text {
+        font-size: 20px;
+      }
+
+      .loading-bar-container {
+        width: 90%;
+      }
+    }
+
+    /* For very small devices (phones) */
+    @media (max-width: 480px) {
+      .loading-text {
+        font-size: 18px;
+      }
+
+      .loading-bar-container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+    <div class="loading-text">Weighing options, Please wait...</div>
+  </div>
+
+  <script>
+    // Redirect to main site after loading is complete (for example, after 5 seconds)
+    setTimeout(function() {
+      window.location.href = "https://catzmoke.github.io/Catsmoke-HQ"; // Replace with your main URL
+    }, 5000); // 5 seconds (adjust as necessary)
+  </script>
+</body>
+</html>
