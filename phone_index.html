@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catsmoke HQ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catsmoke HQ – Mobile</title>
   <style>
-    /* Basic styles for the desktop and mobile version */
     body {
       margin: 0;
       background-color: #0a0a0a;
@@ -14,27 +13,6 @@
       cursor: default;
     }
 
-    /* Mobile version styles */
-    .mobile-version {
-      display: none; /* Hide mobile version by default */
-    }
-
-    /* Desktop version styles */
-    .desktop-version {
-      display: block; /* Display desktop version */
-    }
-
-    /* Specific mobile styles based on screen width */
-    @media (max-width: 768px) {
-      .desktop-version {
-        display: none; /* Hide desktop version on mobile */
-      }
-      .mobile-version {
-        display: block; /* Show mobile version */
-      }
-    }
-
-    /* More styles for layout, widgets, etc. */
     .room-container {
       position: relative;
       width: 100vw;
@@ -45,36 +23,12 @@
       flex-direction: column;
       align-items: center;
     }
-
-    /* Your existing styles here... */
-    /* Add the same styles you already created for the phone version here */
-
   </style>
 </head>
 <body>
-  <!-- Desktop Version (will only show on PC) -->
-  <div class="desktop-version">
-    <!-- Existing desktop content here -->
-    <p>Desktop version content</p>
+  <div class="room-container">
+    <p>Mobile version content</p>
+    <!-- Add your music player, icons, widgets, etc. here -->
   </div>
-
-  <!-- Mobile Version (will only show on mobile) -->
-  <div class="mobile-version">
-    <div class="room-container">
-      <!-- Mobile-specific content, music, widgets, etc. -->
-      <p>Mobile version content</p>
-    </div>
-  </div>
-
-  <script>
-    // Detect if the user is on a mobile device and redirect if necessary
-    if (window.innerWidth <= 768) {
-      // Redirect to mobile version
-      window.location.href = "https://catzmoke.github.io/Catsmoke-HQ/mobile";  // Adjust mobile path
-    } else {
-      // Redirect to desktop version
-      window.location.href = "https://catzmoke.github.io/Catsmoke-HQ";
-    }
-  </script>
 </body>
 </html>
