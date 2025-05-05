@@ -46,6 +46,10 @@
       user-select: none;
     }
 
+    .top-navbar > div:hover .dropdown-content {
+      display: block;
+    }
+
     .dropdown-content {
       display: none;
       position: absolute;
@@ -64,10 +68,15 @@
       cursor: pointer;
     }
 
+    .dropdown-content div:hover {
+      color: #ffaa33;
+    }
+
     .music-player {
       position: fixed;
       bottom: 10px;
-      left: 5%;
+      left: 50%;
+      transform: translateX(-50%);
       width: 90%;
       display: flex;
       flex-direction: column;
@@ -120,6 +129,12 @@
       width: 90%;
     }
 
+    #otbWidget {
+      bottom: 10%;
+      left: 5%;
+      width: 90%;
+    }
+
     #closetWidget {
       top: 30%;
       left: 10%;
@@ -160,7 +175,7 @@
     <div class="top-navbar">
       <div>
         Music
-        <div class="dropdown-content">
+        <div class="dropdown-content" id="musicDropdown">
           <div onclick="playTrack('audio/fts.wav')">▶ FTS</div>
           <div onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
           <div onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
@@ -168,10 +183,9 @@
       </div>
       <div>
         Videos
-        <div class="dropdown-content">
-          <div onclick="toggleWidget('tvWidget')">📺 Retrospect (Visualizer)</div>
-          <div onclick="toggleWidget('tvWidget')">⌛ 360 Degrees ft Haz</div>
-          <div onclick="toggleWidget('tvWidget')">⌛ Out The Blue ft Haz</div>
+        <div class="dropdown-content" id="videoDropdown">
+          <div onclick="openRetrospectVideo()">📺 Retrospect (Visualizer)</div>
+          <div onclick="openOutTheBlueVideo()">⌛ Out The Blue ft Haz</div>
         </div>
       </div>
       <div>
@@ -200,28 +214,40 @@
     <!-- Audio Element -->
     <audio id="audio" src="audio/fts.wav"></audio>
 
-<!-- TV Widget with YouTube video and ✖ close button -->
-<div id="tvWidget" class="widget">
-  <div style="display: flex; justify-content: flex-end;">
-    <div onclick="toggleWidget('tvWidget')" 
-         style="color: white; font-size: 20px; cursor: pointer; margin-bottom: 8px;">
-      ✖
+    <!-- TV Widget with YouTube video -->
+    <div id="tvWidget" class="widget">
+      <div style="display: flex; justify-content: flex-end;">
+        <div onclick="toggleWidget('tvWidget')" 
+             style="color: white; font-size: 20px; cursor: pointer; margin-bottom: 8px;">
+          ✖
+        </div>
+      </div>
+      <div style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
+        <iframe 
+          src="https://www.youtube.com/embed/7tQoA40jkuA"
+          frameborder="0"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+        </iframe>
+      </div>
     </div>
-  </div>
-  <div style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
-    <iframe 
-      src="https://www.youtube.com/embed/7tQoA40jkuA"
-      frameborder="0"
-      allowfullscreen
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
-    </iframe>
-  </div>
-</div>
+
+    <!-- Out The Blue Video Popup -->
+    <div id="otbWidget" class="widget">
+      <div style="display: flex; justify-content: flex-end;">
+        <div onclick="toggleWidget('otbWidget')" 
+             style="color: white; font-size: 20px; cursor: pointer; margin-bottom: 8px;">
+          ✖
+        </div>
+      </div>
+      <video controls style="width: 100%; border-radius: 8px;">
+        <source src="media/otb.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
 
     <!-- Closet Widget -->
-    <div id="closetWidget" class="widget">
-      <div>Tees - Coming Soon</div>
-    </div>
+
 
     <!-- Desk Widget -->
     <div id="deskWidget" class="widget">
@@ -276,26 +302,13 @@
       widget.style.display = widget.style.display === 'block' ? 'none' : 'block';
     }
 
-    document.querySelectorAll('.top-navbar > div').forEach(tab => {
-      tab.addEventListener('click', function (e) {
-        e.stopPropagation();
-        document.querySelectorAll('.dropdown-content').forEach(dc => {
-          if (dc !== tab.querySelector('.dropdown-content')) {
-            dc.style.display = 'none';
-          }
-        });
-        const dropdown = tab.querySelector('.dropdown-content');
-        if (dropdown) {
-          dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-        }
-      });
-    });
+    function openRetrospectVideo() {
+      toggleWidget('tvWidget');
+    }
 
-    document.body.addEventListener('click', () => {
-      document.querySelectorAll('.dropdown-content').forEach(dc => {
-        dc.style.display = 'none';
-      });
-    });
+    function openOutTheBlueVideo() {
+      toggleWidget('otbWidget');
+    }
   </script>
 </body>
 </html>
