@@ -185,8 +185,9 @@
     </div>
 
     <div class="tv-widget" id="tvWidget">
+      <div class="video" onclick="openOutTheBlueVideo()">💿 Hazz x Catsmoke - 360 Degrees (Full Album)</div>
       <div class="video" onclick="openRetrospectVideo()">📺 Retrospect (Visualizer)</div>
-      <div class="video" onclick="openOutTheBlueVideo()">⌛ Out The Blue ft Haz (Teaser)</div>
+
     </div>
 
     <div class="closet-widget" id="closetWidget">
@@ -214,10 +215,7 @@
     <!-- Out The Blue Video Popup -->
     <div id="otbPopup">
       <span id="otbClose" onclick="closeOutTheBlueVideo()">✖</span>
-      <video id="otbVideo" controls>
-        <source src="media/otb.mov" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <iframe id="retrospectIframe" src="" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -283,14 +281,19 @@
     }
 
     function openOutTheBlueVideo() {
-      const popup = document.getElementById('otbPopup');
+      const popup = document.getElementById('retrospectPopup');
+      const iframe = document.getElementById('retrospectIframe');
+      iframe.src = 'https://www.youtube.com/embed/EuTKums7TR4';
       popup.style.display = 'block';
     }
 
     function closeOutTheBlueVideo() {
-      const popup = document.getElementById('otbPopup');
+      const popup = document.getElementById('retrospectPopup');
+      const iframe = document.getElementById('retrospectIframe');
+      iframe.src = '';
       popup.style.display = 'none';
     }
+
   </script>
 </body>
 </html>
