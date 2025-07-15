@@ -179,6 +179,7 @@
           <div onclick="playTrack('audio/fts.wav')">▶ FTS</div>
           <div onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
           <div onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
+          <div onclick="playTrack('audio/active.wav')">▶ Active</div>		  
         </div>
       </div>
       <div>
@@ -272,6 +273,7 @@
         'fts.wav': 'FTS',
         'triple_smoke.wav': 'Triple Smoke',
         'cannon.wav': 'Cannon'
+        'active.wav': 'Active'		
       };
       trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
       audio.src = src;

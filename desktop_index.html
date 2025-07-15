@@ -182,6 +182,7 @@
       <div class="song" onclick="playTrack('audio/fts.wav')">▶ FTS</div>
       <div class="song" onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
       <div class="song" onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
+	  <div class="song" onclick="playTrack('audio/active.wav')">▶ Active (Bonus)</div>
     </div>
 
     <div class="tv-widget" id="tvWidget">
@@ -251,6 +252,7 @@
         'fts.wav': 'FTS',
         'triple_smoke.wav': 'Triple Smoke',
         'cannon.wav': 'Cannon'
+		'active.wav': 'Active'
       };
 
       trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
