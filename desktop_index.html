@@ -109,8 +109,7 @@
       outline: none;
     }
 
-    /* Retrospect Video Popup */
-    #retrospectPopup {
+    #retrospectPopup, #otbPopup {
       display: none;
       position: fixed;
       top: 0;
@@ -123,44 +122,15 @@
       box-sizing: border-box;
     }
 
-    #retrospectPopup iframe {
+    #retrospectPopup iframe,
+    #otbPopup iframe {
       width: 100%;
       height: 90%;
       border: none;
       border-radius: 8px;
     }
 
-    #retrospectClose {
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      text-align: right;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    /* Out The Blue Video Popup */
-    #otbPopup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 10000;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    #otbPopup video {
-      width: 100%;
-      height: 90%;
-      border: none;
-      border-radius: 8px;
-    }
-
-    #otbClose {
+    #retrospectClose, #otbClose {
       color: white;
       font-size: 24px;
       cursor: pointer;
@@ -182,13 +152,12 @@
       <div class="song" onclick="playTrack('audio/fts.wav')">▶ FTS</div>
       <div class="song" onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
       <div class="song" onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
-	  <div class="song" onclick="playTrack('audio/active.wav')">▶ Active (Bonus)</div>
+      <div class="song" onclick="playTrack('audio/active.wav')">▶ Active (Bonus)</div>
     </div>
 
     <div class="tv-widget" id="tvWidget">
       <div class="video" onclick="openOutTheBlueVideo()">📺 Out The Blue ft Hazz (Music Video)</div>
       <div class="video" onclick="openRetrospectVideo()">📺 Retrospect (Visualizer)</div>
-
     </div>
 
     <div class="closet-widget" id="closetWidget">
@@ -207,16 +176,14 @@
 
     <audio id="audio" src="audio/fts.wav"></audio>
 
-    <!-- Retrospect Video Popup -->
     <div id="retrospectPopup">
       <span id="retrospectClose" onclick="closeRetrospectVideo()">✖</span>
       <iframe id="retrospectIframe" src="" allowfullscreen></iframe>
     </div>
 
-    <!-- Out The Blue Video Popup -->
     <div id="otbPopup">
       <span id="otbClose" onclick="closeOutTheBlueVideo()">✖</span>
-      <iframe id="retrospectIframe" src="" allowfullscreen></iframe>
+      <iframe id="otbIframe" src="" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -251,8 +218,8 @@
       const titleMap = {
         'fts.wav': 'FTS',
         'triple_smoke.wav': 'Triple Smoke',
-        'cannon.wav': 'Cannon'
-		'active.wav': 'Active'
+        'cannon.wav': 'Cannon',
+        'active.wav': 'Active (Bonus)'
       };
 
       trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
@@ -283,19 +250,18 @@
     }
 
     function openOutTheBlueVideo() {
-      const popup = document.getElementById('retrospectPopup');
-      const iframe = document.getElementById('retrospectIframe');
+      const popup = document.getElementById('otbPopup');
+      const iframe = document.getElementById('otbIframe');
       iframe.src = 'https://www.youtube.com/embed/1ZsXdN66ayA';
       popup.style.display = 'block';
     }
 
     function closeOutTheBlueVideo() {
-      const popup = document.getElementById('retrospectPopup');
-      const iframe = document.getElementById('retrospectIframe');
+      const popup = document.getElementById('otbPopup');
+      const iframe = document.getElementById('otbIframe');
       iframe.src = '';
       popup.style.display = 'none';
     }
-
   </script>
 </body>
 </html>

@@ -129,12 +129,6 @@
       width: 90%;
     }
 
-    #otbWidget {
-      bottom: 10%;
-      left: 5%;
-      width: 90%;
-    }
-
     #closetWidget {
       top: 30%;
       left: 10%;
@@ -179,14 +173,13 @@
           <div onclick="playTrack('audio/fts.wav')">▶ FTS</div>
           <div onclick="playTrack('audio/triple_smoke.wav')">▶ Triple Smoke</div>
           <div onclick="playTrack('audio/cannon.wav')">▶ Cannon</div>
-          <div onclick="playTrack('audio/active.wav')">▶ Active</div>		  
+          <div onclick="playTrack('audio/active.wav')">▶ Active (Bonus)</div>		  
         </div>
       </div>
       <div>
         Videos
         <div class="dropdown-content" id="videoDropdown">
-          <div onclick="openRetrospectVideo()">📺 Out The Blue ft Hazz (Music Video)</div>
-
+          <div onclick="toggleWidget('tvWidget')">📺 Out The Blue ft Hazz (Music Video)</div>
         </div>
       </div>
       <div>
@@ -216,10 +209,7 @@
     <!-- TV Widget with YouTube video -->
     <div id="tvWidget" class="widget">
       <div style="display: flex; justify-content: flex-end;">
-        <div onclick="toggleWidget('tvWidget')" 
-             style="color: white; font-size: 20px; cursor: pointer; margin-bottom: 8px;">
-          ✖
-        </div>
+        <div onclick="toggleWidget('tvWidget')" style="color: white; font-size: 20px; cursor: pointer; margin-bottom: 8px;">✖</div>
       </div>
       <div style="position: relative; padding-top: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
         <iframe 
@@ -232,7 +222,9 @@
     </div>
 
     <!-- Closet Widget -->
-
+    <div id="closetWidget" class="widget">
+      <div>Coming soon</div>
+    </div>
 
     <!-- Desk Widget -->
     <div id="deskWidget" class="widget">
@@ -272,8 +264,8 @@
       const titleMap = {
         'fts.wav': 'FTS',
         'triple_smoke.wav': 'Triple Smoke',
-        'cannon.wav': 'Cannon'
-        'active.wav': 'Active'		
+        'cannon.wav': 'Cannon',
+        'active.wav': 'Active (Bonus)'		
       };
       trackTitle.textContent = 'Now Playing: ' + (titleMap[filename] || 'Unknown');
       audio.src = src;
@@ -286,14 +278,6 @@
     function toggleWidget(widgetId) {
       const widget = document.getElementById(widgetId);
       widget.style.display = widget.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openRetrospectVideo() {
-      toggleWidget('tvWidget');
-    }
-
-    function openOutTheBlueVideo() {
-      toggleWidget('otbWidget');
     }
   </script>
 </body>
